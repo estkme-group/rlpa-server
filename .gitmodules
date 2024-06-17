@@ -1,0 +1,3 @@
+[submodule "lpac"]
+	path = lpac
+	url = https://github.com/estkme-group/lpac.git
