@@ -5,7 +5,7 @@ on:
     branches: [main]
   push:
     branches: [main]
-    tags: [v*]
+    tags: ["*"]
     paths-ignore:
       - "**/*.md"
       - LICENSE
