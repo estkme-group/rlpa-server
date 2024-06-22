@@ -58,11 +58,12 @@ jobs:
       - name: Make image list
         id: images
         run: |
-          IMAGES='ghcr.io/${{ github.repository }}\n'
+          echo 'images<<EOF' >> "$GITHUB_OUTPUT"
+          echo 'ghcr.io/${{ github.repository }}' >> "$GITHUB_OUTPUT"
           if ${{ steps.dockerhub.outcome == 'success' }}; then
-            IMAGES+='docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}\n'
+            echo 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}' >> "$GITHUB_OUTPUT"
           fi
-          echo -e "images=$IMAGES" >> "$GITHUB_OUTPUT"
+          echo 'EOF' >> "$GITHUB_OUTPUT"
       - name: Metadata
         id: meta
         uses: docker/metadata-action@v5
