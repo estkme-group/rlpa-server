@@ -129,8 +129,12 @@ class DownloadProfileMode extends RLPAWorkMode
     public function start($data)
     {
         $this->state = 0;
+        echo "Recv: " . bin2hex($data) . PHP_EOL;
         $data = ltrim($data, "LPA:");
         $data = explode(chr(0x02), $data); // GSM-8bit will convert $ to \x02
+        if (count($data) < 2) {
+          $data = explode(' ', $data[0]); // iOS 10 fallback
+        }
 
         print_r($data);
 
